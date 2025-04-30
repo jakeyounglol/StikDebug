@@ -15,7 +15,7 @@
       "subtitle": "On-device debugger",
       "localizedDescription": "StikDebug is an on-device debugger designed specifically for self-installed apps.",
       "category": "developer",
-      "iconURL": "https://stikdebug.xyz/icon.png",
+      "iconURL": "https://stikdebug.xyz/assets/icon.png",
       "tintColor": "#293B45",
       "minOSVersion": "17.4",
       "screenshots": {
@@ -23,22 +23,22 @@
           {
             "width": 1290,
             "height": 2796,
-            "imageURL": "https:/stikdebug.xyz/iphone_1.png"
+            "imageURL": "https:/stikdebug.xyz/IMG_1856.png"
           },
           {
             "width": 1290,
             "height": 2796,
-            "imageURL": "https://stikdebug.xyz/iphone_2.png"
+            "imageURL": "https://stikdebug.xyz/IMG_1857.png"
           },
           {
             "width": 1290,
             "height": 2796,
-            "imageURL": "https://stikdebug.xyz/iphone_3.png"
+            "imageURL": "https://stikdebug.xyz/IMG_1858.png"
           },
           {
             "width": 1290,
             "height": 2796,
-            "imageURL": "https://stikdebug.xyz/iphone_4.png"
+            "imageURL": "https://stikdebug.xyz/IMG_1859.png"
           }
         ],
       },
