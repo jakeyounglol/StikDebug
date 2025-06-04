@@ -23,8 +23,14 @@ class TunnelManager: ObservableObject {
     }
 
     private func loadPreferences() {
-        NETunnelProviderManager.loadAllFromPreferences { [weak self] mgrs, _ in
+        NETunnelProviderManager.loadAllFromPreferences { [weak self] mgrs, error in
             guard let self = self else { return }
+            if let error = error {
+                print("Failed to load configurations: \(error.localizedDescription)")
+                self.manager = nil
+                self.status = .error
+                return
+            }
             self.manager = mgrs?.first
             self.status = self.manager?.connection.status.vpnStatus ?? self.currentStatusFromDefaults()
         }
