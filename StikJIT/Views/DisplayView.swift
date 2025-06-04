@@ -4,6 +4,7 @@
 //  Created by neoarz on 4/9/25.
 
 import SwiftUI
+import SwiftGlass
 
 struct AccentColorPicker: View {
     @Binding var selectedColor: Color
@@ -79,7 +80,7 @@ struct DisplayView: View {
         ZStack {
             if appTheme == "vision" {
                 Color.clear
-                    .background(.ultraThinMaterial)
+                    .glass(radius: 0)
                     .ignoresSafeArea()
             } else {
                 Color(colorScheme == .dark ? .black : UIColor.systemBackground)
@@ -155,7 +156,7 @@ struct DisplayView: View {
                     .background(
                         Group {
                             if appTheme == "vision" {
-                                Color.clear.background(.ultraThinMaterial)
+                                Color.clear.glass(radius: 16)
                             } else {
                                 Color(UIColor.systemGray6)
                             }
@@ -193,7 +194,7 @@ struct DisplayView: View {
                     .background(
                         Group {
                             if appTheme == "vision" {
-                                Color.clear.background(.ultraThinMaterial)
+                                Color.clear.glass(radius: 16)
                             } else {
                                 Color(UIColor.systemGray6)
                             }
@@ -223,7 +224,7 @@ struct DisplayView: View {
                     .background(
                         Group {
                             if appTheme == "vision" {
-                                Color.clear.background(.ultraThinMaterial)
+                                Color.clear.glass(radius: 16)
                             } else {
                                 Color(UIColor.systemGray6)
                             }

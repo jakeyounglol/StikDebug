@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGlass
 import UniformTypeIdentifiers
 
 extension UIDocumentPickerViewController {
@@ -53,7 +54,7 @@ struct HomeView: View {
         ZStack {
             if appTheme == "vision" {
                 Color.clear
-                    .background(.ultraThinMaterial)
+                    .glass(radius: 0)
                     .edgesIgnoringSafeArea(.all)
             } else {
                 // Use system background

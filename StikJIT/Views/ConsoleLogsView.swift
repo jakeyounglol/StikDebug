@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftGlass
 import UIKit
 
 struct ConsoleLogsView: View {
@@ -46,7 +47,7 @@ struct ConsoleLogsView: View {
             ZStack {
                 if appTheme == "vision" {
                     Color.clear
-                        .background(.ultraThinMaterial)
+                        .glass(radius: 0)
                         .edgesIgnoringSafeArea(.all)
                 } else {
                     // Use system background color instead of fixed black

@@ -4,6 +4,7 @@
 //  Created by Stephen on 3/27/25.
 
 import SwiftUI
+import SwiftGlass
 import UniformTypeIdentifiers
 import UIKit
 
@@ -61,7 +62,7 @@ struct SettingsView: View {
         ZStack {
             if appTheme == "vision" {
                 Color.clear
-                    .background(.ultraThinMaterial)
+                    .glass(radius: 0)
                     .ignoresSafeArea()
             } else {
                 Color(UIColor.systemBackground)
@@ -636,7 +637,7 @@ struct SettingsCard<Content: View>: View {
             .background(
                 Group {
                     if appTheme == "vision" {
-                        Color.clear.background(.ultraThinMaterial)
+                        Color.clear.glass(radius: 16)
                     } else {
                         Color(UIColor.secondarySystemBackground)
                     }
