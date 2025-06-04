@@ -265,7 +265,7 @@ struct DisplayView: View {
             case "light":
                 window.overrideUserInterfaceStyle = .light
             case "vision":
-                window.overrideUserInterfaceStyle = .light
+                window.overrideUserInterfaceStyle = .dark
             default:
                 window.overrideUserInterfaceStyle = .unspecified
             }
