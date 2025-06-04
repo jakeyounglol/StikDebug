@@ -155,6 +155,9 @@ class TunnelManager: ObservableObject {
             switch connectionStatus {
             case .invalid, .disconnected:
                 self.tunnelStatus = .disconnected
+                // Restart the heartbeat when the VPN disconnects so that
+                // debugging remains functional while browsing other tabs
+                startHeartbeatInBackground()
             case .connecting:
                 self.tunnelStatus = .connecting
             case .connected:
