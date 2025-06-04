@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "title": "Welcome!",
+    "body": "Thank you for using StikDebug. Stay tuned for updates."
+  },
+  {
+    "id": 2,
+    "title": "New Feature",
+    "body": "Announcements are now shown on the home screen."
+  }
+]
