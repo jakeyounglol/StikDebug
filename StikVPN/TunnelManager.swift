@@ -9,16 +9,20 @@ class TunnelManager: ObservableObject {
     }
 
     @Published var status: TunnelStatus = .disconnected {
-        didSet { sharedDefaults.set(status.rawValue, forKey: "vpnStatus") }
+        didSet { sharedDefaults?.set(status.rawValue, forKey: "vpnStatus") }
     }
 
-    private let sharedDefaults = UserDefaults(suiteName: "group.com.stik.sj")!
+    private let sharedDefaults = UserDefaults(suiteName: "group.com.stik.sj")
     private var manager: NETunnelProviderManager?
 
     private init() {
         loadPreferences()
-        NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: sharedDefaults, queue: .main) { [weak self] _ in
-            self?.status = self?.currentStatusFromDefaults() ?? .disconnected
+        if let defaults = sharedDefaults {
+            NotificationCenter.default.addObserver(forName: UserDefaults.didChangeNotification, object: defaults, queue: .main) { [weak self] _ in
+                self?.status = self?.currentStatusFromDefaults() ?? .disconnected
+            }
+        } else {
+            print("Warning: shared app group not available")
         }
     }
 
@@ -37,7 +41,8 @@ class TunnelManager: ObservableObject {
     }
 
     private func currentStatusFromDefaults() -> TunnelStatus {
-        if let raw = sharedDefaults.string(forKey: "vpnStatus"), let st = TunnelStatus(rawValue: raw) {
+        guard let defaults = sharedDefaults else { return .disconnected }
+        if let raw = defaults.string(forKey: "vpnStatus"), let st = TunnelStatus(rawValue: raw) {
             return st
         }
         return .disconnected
