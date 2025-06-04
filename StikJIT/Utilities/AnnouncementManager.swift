@@ -4,6 +4,9 @@ struct Announcement: Identifiable, Codable {
     let id: Int
     let title: String
     let body: String
+    let date: String
+    let time: String
+    let visible: Bool
 }
 
 class AnnouncementManager {
@@ -25,8 +28,10 @@ class AnnouncementManager {
                 return
             }
 
+            let visibleAnnouncements = announcements.filter { $0.visible }
+
             DispatchQueue.main.async {
-                completion(announcements)
+                completion(visibleAnnouncements)
             }
         }.resume()
     }

@@ -20,6 +20,9 @@ struct AnnouncementCard: View {
             Text(announcement.body)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
+            Text("\(announcement.date) \(announcement.time)")
+                .font(.caption)
+                .foregroundColor(.secondary)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -34,5 +37,14 @@ struct AnnouncementCard: View {
 }
 
 #Preview {
-    AnnouncementCard(announcement: Announcement(id: 0, title: "Title", body: "Body"))
+    AnnouncementCard(
+        announcement: Announcement(
+            id: 0,
+            title: "Title",
+            body: "Body",
+            date: "2025-01-01",
+            time: "00:00",
+            visible: true
+        )
+    )
 }
