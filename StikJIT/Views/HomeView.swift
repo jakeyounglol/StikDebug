@@ -403,7 +403,7 @@ struct HomeView: View {
     private func dismiss(_ announcement: Announcement) {
         var ids = dismissedIDs
         ids.insert(announcement.id)
-        dismissedIDs = ids
+        dismissedIDsStorage = ids.map(String.init).joined(separator: ",")
         withAnimation {
             announcements.removeAll { $0.id == announcement.id }
         }
