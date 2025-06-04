@@ -77,8 +77,14 @@ struct DisplayView: View {
     
     var body: some View {
         ZStack {
-            Color(colorScheme == .dark ? .black : UIColor.systemBackground)
-                .ignoresSafeArea()
+            if appTheme == "vision" {
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .ignoresSafeArea()
+            } else {
+                Color(colorScheme == .dark ? .black : UIColor.systemBackground)
+                    .ignoresSafeArea()
+            }
                 
             ScrollView {
                 VStack(spacing: 16) {
@@ -118,6 +124,15 @@ struct DisplayView: View {
                                 accentColor: selectedAccentColor,
                                 action: { appTheme = "dark" }
                             )
+
+                            // Vision Theme
+                            ThemeOptionButton(
+                                title: "Vision",
+                                systemImageName: "eye",
+                                isSelected: appTheme == "vision",
+                                accentColor: selectedAccentColor,
+                                action: { appTheme = "vision" }
+                            )
                         }
                         .onChange(of: appTheme) { newValue in
                             applyTheme(newValue)
@@ -137,7 +152,15 @@ struct DisplayView: View {
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
-                    .background(Color(UIColor.systemGray6))
+                    .background(
+                        Group {
+                            if appTheme == "vision" {
+                                Color.clear.background(.ultraThinMaterial)
+                            } else {
+                                Color(UIColor.systemGray6)
+                            }
+                        }
+                    )
                     .cornerRadius(16)
                     
                     // Username Section
@@ -167,7 +190,15 @@ struct DisplayView: View {
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
-                    .background(Color(UIColor.systemGray6))
+                    .background(
+                        Group {
+                            if appTheme == "vision" {
+                                Color.clear.background(.ultraThinMaterial)
+                            } else {
+                                Color(UIColor.systemGray6)
+                            }
+                        }
+                    )
                     .cornerRadius(16)
                     
                     // JIT Options Section
@@ -189,7 +220,15 @@ struct DisplayView: View {
                     }
                     .padding(.vertical, 16)
                     .padding(.horizontal, 16)
-                    .background(Color(UIColor.systemGray6))
+                    .background(
+                        Group {
+                            if appTheme == "vision" {
+                                Color.clear.background(.ultraThinMaterial)
+                            } else {
+                                Color(UIColor.systemGray6)
+                            }
+                        }
+                    )
                     .cornerRadius(16)
                 }
                 .padding(.horizontal, 16)
@@ -225,6 +264,8 @@ struct DisplayView: View {
                 window.overrideUserInterfaceStyle = .dark
             case "light":
                 window.overrideUserInterfaceStyle = .light
+            case "vision":
+                window.overrideUserInterfaceStyle = .light
             default:
                 window.overrideUserInterfaceStyle = .unspecified
             }
@@ -234,24 +275,52 @@ struct DisplayView: View {
 
 struct ThemeOptionButton: View {
     let title: String
-    let imageName: String
+    let imageName: String?
+    let systemImageName: String?
     let isSelected: Bool
     let accentColor: Color
     let action: () -> Void
+
+    init(title: String,
+         imageName: String? = nil,
+         systemImageName: String? = nil,
+         isSelected: Bool,
+         accentColor: Color,
+         action: @escaping () -> Void) {
+        self.title = title
+        self.imageName = imageName
+        self.systemImageName = systemImageName
+        self.isSelected = isSelected
+        self.accentColor = accentColor
+        self.action = action
+    }
     
     var body: some View {
         Button(action: action) {
             VStack(spacing: 8) {
-                Image(imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 160)
-                    .cornerRadius(8)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(isSelected ? accentColor : Color.clear, lineWidth: 2)
-                    )
-                
+                if let name = imageName {
+                    Image(name)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 160)
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(isSelected ? accentColor : Color.clear, lineWidth: 2)
+                        )
+                } else if let systemName = systemImageName {
+                    Image(systemName: systemName)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 80)
+                        .padding()
+                        .foregroundColor(isSelected ? accentColor : .primary)
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(isSelected ? accentColor : Color.primary.opacity(0.1), lineWidth: 2)
+                        )
+                }
+
                 Text(title)
                     .font(.caption)
                     .foregroundColor(isSelected ? accentColor : .primary)

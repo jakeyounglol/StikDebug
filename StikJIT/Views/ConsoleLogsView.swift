@@ -16,6 +16,7 @@ struct ConsoleLogsView: View {
     @State private var autoScroll = true
     @State private var scrollView: ScrollViewProxy? = nil
     @AppStorage("customAccentColor") private var customAccentColorHex: String = ""
+    @AppStorage("appTheme") private var appTheme: String = "system"
     
     // Alert handling
     @State private var showingCustomAlert = false
@@ -43,9 +44,15 @@ struct ConsoleLogsView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Use system background color instead of fixed black
-                Color(colorScheme == .dark ? .black : .white)
-                    .edgesIgnoringSafeArea(.all)
+                if appTheme == "vision" {
+                    Color.clear
+                        .background(.ultraThinMaterial)
+                        .edgesIgnoringSafeArea(.all)
+                } else {
+                    // Use system background color instead of fixed black
+                    Color(colorScheme == .dark ? .black : .white)
+                        .edgesIgnoringSafeArea(.all)
+                }
                 
                 VStack(spacing: 0) {
                     // Terminal logs area with theme support

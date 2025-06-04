@@ -39,6 +39,7 @@ struct HomeView: View {
     @State private var viewDidAppeared = false
     @State private var pendingBundleIdToEnableJIT : String? = nil
     @State private var pendingPIDToEnableJIT : Int? = nil
+    @AppStorage("appTheme") private var appTheme: String = "system"
     
     private var accentColor: Color {
         if customAccentColorHex.isEmpty {
@@ -50,9 +51,15 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            // Use system background
-            Color(colorScheme == .dark ? .black : .white)
-            .edgesIgnoringSafeArea(.all)
+            if appTheme == "vision" {
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .edgesIgnoringSafeArea(.all)
+            } else {
+                // Use system background
+                Color(colorScheme == .dark ? .black : .white)
+                    .edgesIgnoringSafeArea(.all)
+            }
             
             VStack(spacing: 25) {
                 Spacer()

@@ -475,6 +475,8 @@ struct HeartbeatApp: App {
                 window.overrideUserInterfaceStyle = .dark
             case "light":
                 window.overrideUserInterfaceStyle = .light
+            case "vision":
+                window.overrideUserInterfaceStyle = .light
             default:
                 window.overrideUserInterfaceStyle = .unspecified
             }
@@ -506,6 +508,8 @@ struct HeartbeatApp: App {
             case "dark":
                 window.overrideUserInterfaceStyle = .dark
             case "light":
+                window.overrideUserInterfaceStyle = .light
+            case "vision":
                 window.overrideUserInterfaceStyle = .light
             default:
                 window.overrideUserInterfaceStyle = .unspecified
@@ -870,6 +874,8 @@ struct LoadingView: View {
         case "dark":
             return true
         case "light":
+            return false
+        case "vision":
             return false
         default:
             return colorScheme == .dark

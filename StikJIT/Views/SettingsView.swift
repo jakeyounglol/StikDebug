@@ -12,6 +12,7 @@ struct SettingsView: View {
     @AppStorage("customAccentColor") private var customAccentColorHex: String = ""
     @AppStorage("selectedAppIcon") private var selectedAppIcon: String = "AppIcon"
     @AppStorage("autoQuitAfterEnablingJIT") private var doAutoQuitAfterEnablingJIT = false
+    @AppStorage("appTheme") private var appTheme: String = "system"
 
     @State private var isShowingPairingFilePicker = false
     @Environment(\.colorScheme) private var colorScheme
@@ -58,8 +59,14 @@ struct SettingsView: View {
 
     var body: some View {
         ZStack {
-            Color(UIColor.systemBackground)
-                .ignoresSafeArea()
+            if appTheme == "vision" {
+                Color.clear
+                    .background(.ultraThinMaterial)
+                    .ignoresSafeArea()
+            } else {
+                Color(UIColor.systemBackground)
+                    .ignoresSafeArea()
+            }
             
             ScrollView {
                 VStack(spacing: 12) {
@@ -617,6 +624,8 @@ struct SettingsView: View {
 
 struct SettingsCard<Content: View>: View {
     let content: Content
+
+    @AppStorage("appTheme") private var appTheme: String = "system"
     
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
@@ -624,7 +633,15 @@ struct SettingsCard<Content: View>: View {
     
     var body: some View {
         content
-            .background(Color(UIColor.secondarySystemBackground))
+            .background(
+                Group {
+                    if appTheme == "vision" {
+                        Color.clear.background(.ultraThinMaterial)
+                    } else {
+                        Color(UIColor.secondarySystemBackground)
+                    }
+                }
+            )
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.08), radius: 3, x: 0, y: 2)
     }
