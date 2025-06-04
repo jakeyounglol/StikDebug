@@ -24,7 +24,6 @@ struct StikVPNApp: App {
             ContentView()
                 .onAppear { _ = TunnelManager.shared }
                 .accentColor(accentColor)
-                .environment(\.accentColor, accentColor)
         }
     }
 }
