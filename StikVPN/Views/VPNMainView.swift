@@ -1,21 +1,11 @@
 import SwiftUI
 import NetworkExtension
 
-private let vpnStatusKey = "vpnStatus"
 private let appGroupID = "group.com.stik.sj"
-
-enum TunnelStatus: String {
-    case disconnected = "Disconnected"
-    case connecting = "Connecting"
-    case connected = "Connected"
-    case disconnecting = "Disconnecting"
-    case error = "Error"
-}
 
 struct VPNMainView: View {
     @AppStorage("customAccentColor") private var customAccentColorHex: String = ""
-    @State private var status: TunnelStatus = .disconnected
-    private let sharedDefaults = UserDefaults(suiteName: appGroupID)
+    @StateObject private var manager = TunnelManager.shared
 
     @AppStorage("TunnelDeviceIP", store: UserDefaults(suiteName: appGroupID)) private var deviceIP: String = "10.7.0.0"
     @AppStorage("TunnelFakeIP", store: UserDefaults(suiteName: appGroupID)) private var fakeIP: String = "10.7.0.1"
@@ -33,7 +23,7 @@ struct VPNMainView: View {
         VStack(spacing: 24) {
             Text("StikVPN")
                 .font(.system(.largeTitle, design: .rounded).weight(.bold))
-            Text("Status: \(status.rawValue)")
+            Text("Status: \(manager.tunnelStatus.rawValue)")
                 .font(.system(.title3, design: .rounded))
                 .foregroundColor(.secondary)
 
@@ -77,26 +67,14 @@ struct VPNMainView: View {
             .padding(.top, 8)
         }
         .padding()
-        .onAppear(perform: loadStatus)
-    }
-
-    private func loadStatus() {
-        if let saved = sharedDefaults?.string(forKey: vpnStatusKey),
-           let s = TunnelStatus(rawValue: saved) {
-            status = s
-        }
     }
 
     private func startVPN() {
-        sharedDefaults?.set(TunnelStatus.connecting.rawValue, forKey: vpnStatusKey)
-        status = .connecting
-        // Actual connection handled by network extension target
+        manager.startVPN()
     }
 
     private func stopVPN() {
-        sharedDefaults?.set(TunnelStatus.disconnecting.rawValue, forKey: vpnStatusKey)
-        status = .disconnecting
-        // Actual disconnection handled by network extension target
+        manager.stopVPN()
     }
 
     private func saveIPs() {
