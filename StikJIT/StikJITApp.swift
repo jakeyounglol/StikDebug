@@ -85,16 +85,19 @@ class VPNLogger: ObservableObject {
 class TunnelManager: ObservableObject {
     @Published var tunnelStatus: TunnelStatus = .disconnected
     static var shared = TunnelManager()
+
+    private let sharedDefaults = UserDefaults(suiteName: "group.com.stik.sj")
+    private let vpnStatusKey = "vpnStatus"
     
     private var vpnManager: NETunnelProviderManager?
     private var tunnelDeviceIp: String {
-        UserDefaults.standard.string(forKey: "TunnelDeviceIP") ?? "10.7.0.0"
+        sharedDefaults?.string(forKey: "TunnelDeviceIP") ?? "10.7.0.0"
     }
     private var tunnelFakeIp: String {
-        UserDefaults.standard.string(forKey: "TunnelFakeIP") ?? "10.7.0.1"
+        sharedDefaults?.string(forKey: "TunnelFakeIP") ?? "10.7.0.1"
     }
     private var tunnelSubnetMask: String {
-        UserDefaults.standard.string(forKey: "TunnelSubnetMask") ?? "255.255.255.0"
+        sharedDefaults?.string(forKey: "TunnelSubnetMask") ?? "255.255.255.0"
     }
     private var tunnelBundleId: String {
         Bundle.main.bundleIdentifier!.appending(".TunnelProv")
@@ -107,8 +110,12 @@ class TunnelManager: ObservableObject {
         case disconnecting = "Disconnecting"
         case error = "Error"
     }
-    
+
     private init() {
+        if let saved = sharedDefaults?.string(forKey: vpnStatusKey),
+           let status = TunnelStatus(rawValue: saved) {
+            tunnelStatus = status
+        }
         loadTunnelPreferences()
         NotificationCenter.default.addObserver(self, selector: #selector(statusDidChange(_:)), name: .NEVPNStatusDidChange, object: nil)
     }
@@ -166,6 +173,7 @@ class TunnelManager: ObservableObject {
             @unknown default:
                 self.tunnelStatus = .error
             }
+            self.sharedDefaults?.set(self.tunnelStatus.rawValue, forKey: vpnStatusKey)
             VPNLogger.shared.log("VPN status updated: \(self.tunnelStatus.rawValue)")
         }
     }
@@ -240,6 +248,7 @@ class TunnelManager: ObservableObject {
             return
         }
         tunnelStatus = .connecting
+        sharedDefaults?.set(tunnelStatus.rawValue, forKey: vpnStatusKey)
         let options: [String: NSObject] = [
             "TunnelDeviceIP": tunnelDeviceIp as NSObject,
             "TunnelFakeIP": tunnelFakeIp as NSObject,
@@ -250,13 +259,15 @@ class TunnelManager: ObservableObject {
             VPNLogger.shared.log("Network tunnel start initiated")
         } catch {
             tunnelStatus = .error
+            sharedDefaults?.set(tunnelStatus.rawValue, forKey: vpnStatusKey)
             VPNLogger.shared.log("Failed to start tunnel: \(error.localizedDescription)")
         }
     }
-    
+
     func stopVPN() {
         guard let manager = vpnManager else { return }
         tunnelStatus = .disconnecting
+        sharedDefaults?.set(tunnelStatus.rawValue, forKey: vpnStatusKey)
         manager.connection.stopVPNTunnel()
         VPNLogger.shared.log("Network tunnel stop initiated")
     }

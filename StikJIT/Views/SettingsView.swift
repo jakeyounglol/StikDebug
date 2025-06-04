@@ -31,6 +31,10 @@ struct SettingsView: View {
     
     @State private var showingConsoleLogsView = false
     @State private var showingDisplayView = false
+
+    @AppStorage("TunnelDeviceIP", store: UserDefaults(suiteName: "group.com.stik.sj")) private var deviceIP: String = "10.7.0.0"
+    @AppStorage("TunnelFakeIP", store: UserDefaults(suiteName: "group.com.stik.sj")) private var fakeIP: String = "10.7.0.1"
+    @AppStorage("TunnelSubnetMask", store: UserDefaults(suiteName: "group.com.stik.sj")) private var subnetMask: String = "255.255.255.0"
     
     private var appVersion: String {
         let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
@@ -201,10 +205,10 @@ struct SettingsView: View {
                     
                     // Developer Disk Image section
                     SettingsCard {
-                        VStack(alignment: .leading, spacing: 20) {
-                            Text("Developer Disk Image")
-                                .font(.headline)
-                                .foregroundColor(.primary)
+                                           VStack(alignment: .leading, spacing: 20) {
+                                               Text("Developer Disk Image")
+                                                   .font(.headline)
+                                                   .foregroundColor(.primary)
                                 .padding(.bottom, 4)
                             
                             // Status indicator with icon
@@ -263,6 +267,34 @@ struct SettingsView: View {
                         .onAppear {
                             self.mounted = isMounted()
                         }
+                    }
+                    // VPN configuration section
+                    SettingsCard {
+                        VStack(alignment: .leading, spacing: 16) {
+                            Text("VPN Configuration")
+                                .font(.headline)
+                                .foregroundColor(.primary)
+
+                            TextField("Device IP", text: $deviceIP)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                            TextField("Fake IP", text: $fakeIP)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                            TextField("Subnet Mask", text: $subnetMask)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                            Button(action: saveIPSettings) {
+                                Text("Save")
+                                    .frame(maxWidth: .infinity)
+                                    .padding(.vertical, 8)
+                                    .background(accentColor)
+                                    .foregroundColor(accentColor.contrastText())
+                                    .cornerRadius(12)
+                            }
+                        }
+                        .padding(.vertical, 20)
+                        .padding(.horizontal, 16)
                     }
                     SettingsCard {
                                            VStack(alignment: .leading, spacing: 20) {
@@ -610,6 +642,13 @@ struct SettingsView: View {
                 }
             }
         }
+    }
+
+    private func saveIPSettings() {
+        let defaults = UserDefaults(suiteName: "group.com.stik.sj")
+        defaults?.set(deviceIP, forKey: "TunnelDeviceIP")
+        defaults?.set(fakeIP, forKey: "TunnelFakeIP")
+        defaults?.set(subnetMask, forKey: "TunnelSubnetMask")
     }
 }
 
