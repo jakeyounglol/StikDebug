@@ -92,7 +92,7 @@ func isMounted() -> Bool {
     let listError = image_mounter_copy_devices(client, &devices, &devicesLen)
     if listError == IdeviceSuccess {
         let deviceList = devices?.assumingMemoryBound(to: plist_t.self)
-        var devices: [String] = []
+        var deviceIdentifiers: [String] = []
         for i in 0..<devicesLen {
             let device = deviceList?[i]
             var xmlData: UnsafeMutablePointer<CChar>?
@@ -101,14 +101,14 @@ func isMounted() -> Bool {
             // Use libplist function to convert to XML
             plist_to_xml(device, &xmlData, &xmlLength)
             if let xml = xmlData {
-                devices.append("\(xml)")
+                deviceIdentifiers.append("\(xml)")
             }
             plist_mem_free(xmlData)
             plist_free(device)
         }
 
         image_mounter_free(client)
-        return devices.count != 0
+        return deviceIdentifiers.count != 0
     } else {
         print("Failed to get device list: \(listError)")
         return false

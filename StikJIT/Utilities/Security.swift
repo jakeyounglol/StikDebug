@@ -30,6 +30,13 @@ func checkAppEntitlement(_ ent: String) -> Bool {
         print("Failed to get entitlements")
         return false
     }
-    
-    return entitlements.boolValue != nil && entitlements.boolValue
+
+    // CFTypeRef can be either a CFBoolean or CFNumber representing a boolean
+    if let value = entitlements as? CFBoolean {
+        return CFBooleanGetValue(value)
+    } else if let number = entitlements as? NSNumber {
+        return number.boolValue
+    } else {
+        return false
+    }
 }

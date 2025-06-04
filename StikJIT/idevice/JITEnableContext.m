@@ -30,10 +30,13 @@ JITEnableContext* sharedJITContext = nil;
 }
 
 - (instancetype)init {
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSURL* docPathUrl = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
-    NSURL* logURL = [docPathUrl URLByAppendingPathComponent:@"idevice_log.txt"];
-    idevice_init_logger(Debug, Debug, (char*)logURL.path.UTF8String);
+    self = [super init];
+    if (self) {
+        NSFileManager* fm = [NSFileManager defaultManager];
+        NSURL* docPathUrl = [fm URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask].firstObject;
+        NSURL* logURL = [docPathUrl URLByAppendingPathComponent:@"idevice_log.txt"];
+        idevice_init_logger(Debug, Debug, (char*)logURL.path.UTF8String);
+    }
     return self;
 }
 
