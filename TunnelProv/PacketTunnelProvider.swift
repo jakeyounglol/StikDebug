@@ -10,8 +10,11 @@
 import NetworkExtension
 import Darwin
 
+private let sharedDefaults = UserDefaults(suiteName: "group.com.stik.sj")
+
 class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
+        sharedDefaults?.set("connecting", forKey: "vpnStatus")
         let deviceIP = options?["TunnelDeviceIP"] as? String ?? "10.7.0.0"
         let fakeIP = options?["TunnelFakeIP"] as? String ?? "10.7.0.1"
         
@@ -29,7 +32,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
         settings.ipv4Settings = ipv4
 
         setTunnelNetworkSettings(settings) { error in
-            guard error == nil else { return completionHandler(error) }
+            guard error == nil else {
+                sharedDefaults?.set("error", forKey: "vpnStatus")
+                return completionHandler(error)
+            }
             
             func process() {
                 self.packetFlow.readPackets { packets, protocols in
@@ -47,11 +53,13 @@ class PacketTunnelProvider: NEPacketTunnelProvider {
                 }
             }
             process()
+            sharedDefaults?.set("connected", forKey: "vpnStatus")
             completionHandler(nil)
         }
     }
 
     override func stopTunnel(with reason: NEProviderStopReason, completionHandler: @escaping () -> Void) {
+        sharedDefaults?.set("disconnected", forKey: "vpnStatus")
         completionHandler()
     }
 }
