@@ -63,6 +63,8 @@ struct StikVPNManagementView: View {
             tunnelManager.stopVPN()
         case .disconnected, .error, .disconnecting:
             tunnelManager.startVPN()
+            // Ensure the debugging heartbeat resumes when the VPN is enabled
+            startHeartbeatInBackground()
         }
     }
 }

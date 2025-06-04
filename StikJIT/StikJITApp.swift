@@ -159,6 +159,9 @@ class TunnelManager: ObservableObject {
                 self.tunnelStatus = .connecting
             case .connected:
                 self.tunnelStatus = .connected
+                // Restart the heartbeat whenever the VPN reconnects to
+                // ensure debugging continues across view changes
+                startHeartbeatInBackground()
             case .disconnecting:
                 self.tunnelStatus = .disconnecting
             case .reasserting:
