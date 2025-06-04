@@ -87,10 +87,10 @@ class TunnelManager: ObservableObject {
     static var shared = TunnelManager()
     
     private var vpnManager: NETunnelProviderManager?
-    private var tunnelDeviceIp: String {
+    var tunnelDeviceIp: String {
         UserDefaults.standard.string(forKey: "TunnelDeviceIP") ?? "10.7.0.0"
     }
-    private var tunnelFakeIp: String {
+    var tunnelFakeIp: String {
         UserDefaults.standard.string(forKey: "TunnelFakeIP") ?? "10.7.0.1"
     }
     private var tunnelSubnetMask: String {
