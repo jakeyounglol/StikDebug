@@ -984,11 +984,11 @@ public func showAlert(title: String,
                 },
                 showButton: true,
                 primaryButtonText: primaryButtonText ?? "OK",
+                secondaryButtonText: secondaryButtonText ?? "Cancel",
                 onPrimaryButtonTap: {
                     rootViewController?.presentedViewController?.dismiss(animated: true)
                     completion(true)
                 },
-                secondaryButtonText: secondaryButtonText ?? "Cancel",
                 onSecondaryButtonTap: {
                     rootViewController?.presentedViewController?.dismiss(animated: true)
                     onSecondaryButtonTap?()
