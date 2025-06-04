@@ -29,8 +29,11 @@
 
 ## Features  
 - On-device debugging/Just-In-Time (JIT) compilation for supported apps via [`idevice`](https://github.com/jkcoxson/idevice).  
-- Seamless integration with our custom built loopback vpn.  
-- Native UI for managing debugging/JIT-enabling.  
+- Seamless integration with **StikVPN**, our custom loopback VPN.
+- Built-in StikVPN management to enable or disable the connection.
+- Ability to edit the StikVPN device and fake IP addresses.
+- Option to disable StikVPN auto start at launch.
+- Native UI for managing debugging/JIT-enabling.
 - No data collection—ensuring full privacy. 
 
 ## License  

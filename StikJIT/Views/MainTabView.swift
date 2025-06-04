@@ -24,6 +24,12 @@ struct MainTabView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
+
+            StikVPNManagementView()
+                .tabItem {
+                    Label("StikVPN", systemImage: "lock.shield")
+                }
+
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gearshape.fill")

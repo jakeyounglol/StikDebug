@@ -159,6 +159,9 @@ class TunnelManager: ObservableObject {
                 self.tunnelStatus = .connecting
             case .connected:
                 self.tunnelStatus = .connected
+                // Restart the heartbeat whenever the VPN reconnects to
+                // ensure debugging continues across view changes
+                startHeartbeatInBackground()
             case .disconnecting:
                 self.tunnelStatus = .disconnecting
             case .reasserting:
@@ -435,6 +438,7 @@ var pubHeartBeat = false
 @main
 struct HeartbeatApp: App {
     @AppStorage("hasLaunchedBefore") var hasLaunchedBefore: Bool = false
+    @AppStorage("autoStartVPN") private var autoStartVPN = true
     @State private var showWelcomeSheet: Bool = false
     @State private var isLoading2 = true
     @State private var isPairing = false
@@ -543,8 +547,16 @@ struct HeartbeatApp: App {
                                         isLoading2 = false
                                     }
                                 } else if let vpn_error {
-                                    showAlert(title: "Error", message: "EM Proxy failed to connect: \(vpn_error)", showOk: true) { _ in
-                                        exit(0)
+                                    showAlert(
+                                        title: "Error",
+                                        message: "EM Proxy failed to connect: \(vpn_error)",
+                                        showOk: true,
+                                        primaryButtonText: "Continue",
+                                        showSecondaryButton: true,
+                                        secondaryButtonText: "Exit",
+                                        onSecondaryButtonTap: { exit(0) }
+                                    ) { _ in
+                                        isLoading2 = false
                                     }
                                 }
                             }
@@ -623,7 +635,7 @@ struct HeartbeatApp: App {
                 // Otherwise, start the VPN automatically.
                 if !hasLaunchedBefore {
                     showWelcomeSheet = true
-                } else {
+                } else if autoStartVPN {
                     TunnelManager.shared.startVPN()
                 }
             }
@@ -632,7 +644,9 @@ struct HeartbeatApp: App {
                     // When the user taps "Continue", mark the app as launched and start the VPN.
                     hasLaunchedBefore = true
                     showWelcomeSheet = false
-                    TunnelManager.shared.startVPN()
+                    if autoStartVPN {
+                        TunnelManager.shared.startVPN()
+                    }
                 }
             }
         }
@@ -652,7 +666,7 @@ struct HeartbeatApp: App {
     }
     
     private func checkVPNConnection(callback: @escaping (Bool, String?) -> Void) {
-        let host = NWEndpoint.Host("10.7.0.1")
+        let host = NWEndpoint.Host(TunnelManager.shared.tunnelFakeIp)
         let port = NWEndpoint.Port(rawValue: 62078)!
         let connection = NWConnection(host: host, port: port, using: .tcp)
         var timeoutWorkItem: DispatchWorkItem?
@@ -753,6 +767,7 @@ class MountingProgress: ObservableObject {
             
             mountingThread = Thread {
                 let mountResult = mountPersonalDDI(
+                    deviceIP: TunnelManager.shared.tunnelFakeIp,
                     imagePath: URL.documentsDirectory.appendingPathComponent("DDI/Image.dmg").path,
                     trustcachePath: URL.documentsDirectory.appendingPathComponent("DDI/Image.dmg.trustcache").path,
                     manifestPath: URL.documentsDirectory.appendingPathComponent("DDI/BuildManifest.plist").path,
@@ -795,6 +810,7 @@ func isPairing() -> Bool {
 
 func startHeartbeatInBackground() {
     let heartBeatThread = Thread {
+        setHeartbeatIP(TunnelManager.shared.tunnelFakeIp)
         let completionHandler: @convention(block) (Int32, String?) -> Void = { result, message in
             if result == 0 {
                 print("Heartbeat started successfully: \(message ?? "")")
@@ -923,7 +939,16 @@ struct LoadingView: View {
     }
 }
 
-public func showAlert(title: String, message: String, showOk: Bool, showTryAgain: Bool = false, primaryButtonText: String? = nil, messageType: MessageType = .error, completion: @escaping (Bool) -> Void) {
+public func showAlert(title: String,
+                     message: String,
+                     showOk: Bool,
+                     showTryAgain: Bool = false,
+                     primaryButtonText: String? = nil,
+                     messageType: MessageType = .error,
+                     showSecondaryButton: Bool = false,
+                     secondaryButtonText: String? = nil,
+                     onSecondaryButtonTap: (() -> Void)? = nil,
+                     completion: @escaping (Bool) -> Void) {
     DispatchQueue.main.async {
         guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
             return
@@ -963,6 +988,12 @@ public func showAlert(title: String, message: String, showOk: Bool, showTryAgain
                     rootViewController?.presentedViewController?.dismiss(animated: true)
                     completion(true)
                 },
+                secondaryButtonText: secondaryButtonText ?? "Cancel",
+                onSecondaryButtonTap: {
+                    rootViewController?.presentedViewController?.dismiss(animated: true)
+                    onSecondaryButtonTap?()
+                },
+                showSecondaryButton: showSecondaryButton,
                 messageType: messageType
             )
             let hostingController = UIHostingController(rootView: customErrorView)

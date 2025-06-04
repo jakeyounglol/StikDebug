@@ -12,8 +12,10 @@ import Darwin
 
 class PacketTunnelProvider: NEPacketTunnelProvider {
     override func startTunnel(options: [String: NSObject]?, completionHandler: @escaping (Error?) -> Void) {
-        let deviceIP = options?["TunnelDeviceIP"] as? String ?? "10.7.0.0"
-        let fakeIP = options?["TunnelFakeIP"] as? String ?? "10.7.0.1"
+        let deviceIP = options?["TunnelDeviceIP"] as? String ??
+            UserDefaults.standard.string(forKey: "TunnelDeviceIP") ?? "10.7.0.0"
+        let fakeIP = options?["TunnelFakeIP"] as? String ??
+            UserDefaults.standard.string(forKey: "TunnelFakeIP") ?? "10.7.0.1"
         
         let toNetwork: (String) -> UInt32 = { address in
             var addr = in_addr()

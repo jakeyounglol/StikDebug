@@ -16,5 +16,6 @@ typedef void (^LogFuncC)(const char* message, ...);
 extern bool isHeartbeat;
 
 void startHeartbeat(IdevicePairingFile* pairintFile, TcpProviderHandle** provider, int* heartbeatSessionId, HeartbeatCompletionHandlerC completion, LogFuncC logger);
+void setHeartbeatIP(const char* ip);
 
 #endif /* HEARTBEAT_H */
