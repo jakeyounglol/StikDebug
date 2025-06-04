@@ -435,6 +435,7 @@ var pubHeartBeat = false
 @main
 struct HeartbeatApp: App {
     @AppStorage("hasLaunchedBefore") var hasLaunchedBefore: Bool = false
+    @AppStorage("autoStartVPN") private var autoStartVPN = true
     @State private var showWelcomeSheet: Bool = false
     @State private var isLoading2 = true
     @State private var isPairing = false
@@ -623,7 +624,7 @@ struct HeartbeatApp: App {
                 // Otherwise, start the VPN automatically.
                 if !hasLaunchedBefore {
                     showWelcomeSheet = true
-                } else {
+                } else if autoStartVPN {
                     TunnelManager.shared.startVPN()
                 }
             }
@@ -632,7 +633,9 @@ struct HeartbeatApp: App {
                     // When the user taps "Continue", mark the app as launched and start the VPN.
                     hasLaunchedBefore = true
                     showWelcomeSheet = false
-                    TunnelManager.shared.startVPN()
+                    if autoStartVPN {
+                        TunnelManager.shared.startVPN()
+                    }
                 }
             }
         }
