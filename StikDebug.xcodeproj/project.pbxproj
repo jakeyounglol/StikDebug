@@ -971,10 +971,8 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		DCCE43462DEFE1DD00D433ED /* Debug */ = {
+                               INFOPLIST_FILE = StikJIT/StikVPNInfo.plist;
+                               INFOPLIST_FILE = StikJIT/StikVPNInfo.plist;
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "Apple Development";
