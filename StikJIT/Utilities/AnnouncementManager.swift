@@ -7,12 +7,27 @@ struct Announcement: Identifiable, Codable {
 }
 
 class AnnouncementManager {
-    static func loadAnnouncements() -> [Announcement] {
-        guard let url = Bundle.main.url(forResource: "announcements", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
-              let announcements = try? JSONDecoder().decode([Announcement].self, from: data) else {
-            return []
+    private static let announcementsURL = "https://raw.githubusercontent.com/0-Blu/StikJIT/main/StikJIT/Resources/announcements.json"
+
+    static func fetchAnnouncements(completion: @escaping ([Announcement]) -> Void) {
+        guard let url = URL(string: announcementsURL) else {
+            completion([])
+            return
         }
-        return announcements
+
+        URLSession.shared.dataTask(with: url) { data, response, _ in
+            guard let data = data,
+                  (response as? HTTPURLResponse)?.statusCode == 200,
+                  let announcements = try? JSONDecoder().decode([Announcement].self, from: data) else {
+                DispatchQueue.main.async {
+                    completion([])
+                }
+                return
+            }
+
+            DispatchQueue.main.async {
+                completion(announcements)
+            }
+        }.resume()
     }
 }

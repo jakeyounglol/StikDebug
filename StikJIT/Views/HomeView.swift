@@ -8,7 +8,7 @@
 import SwiftUI
 import UniformTypeIdentifiers
 
-// Load announcements from bundled JSON
+// Load announcements from remote JSON
 import Foundation
 
 extension UIDocumentPickerViewController {
@@ -221,7 +221,9 @@ struct HomeView: View {
             // Initialize background color
             refreshBackground()
 
-            announcements = AnnouncementManager.loadAnnouncements()
+            AnnouncementManager.fetchAnnouncements { loaded in
+                announcements = loaded
+            }
 
             // Add notification observer for showing pairing file picker
             NotificationCenter.default.addObserver(
