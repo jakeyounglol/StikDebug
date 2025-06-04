@@ -536,7 +536,6 @@ struct SettingsView: View {
                         }
                         
                         RunLoop.current.add(progressTimer, forMode: .common)
-                        startHeartbeatInBackground()
                         
                     } catch {
                         print("Error copying file: \(error)")
