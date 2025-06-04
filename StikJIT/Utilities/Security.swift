@@ -5,6 +5,7 @@
 //  Created by s s on 2025/4/6.
 //
 import Security
+import Foundation
 
 
 typealias SecTaskRef = OpaquePointer
@@ -32,9 +33,13 @@ func checkAppEntitlement(_ ent: String) -> Bool {
     }
 
     // CFTypeRef can be either a CFBoolean or CFNumber representing a boolean
-    if let value = entitlements as? CFBoolean {
+    let typeID = CFGetTypeID(entitlements)
+    if typeID == CFBooleanGetTypeID() {
+        let value = unsafeBitCast(entitlements, to: CFBoolean.self)
         return CFBooleanGetValue(value)
-    } else if let number = entitlements as? NSNumber {
+    } else if typeID == CFNumberGetTypeID() {
+        // Bridge to NSNumber for convenience
+        let number = unsafeBitCast(entitlements, to: CFNumber.self) as NSNumber
         return number.boolValue
     } else {
         return false
