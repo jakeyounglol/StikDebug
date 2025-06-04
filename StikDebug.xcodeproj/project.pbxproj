@@ -7,59 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		21FABAD2BEF86D366C52E0DA /* DebugWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC139F6C2DE97EA400F63846 /* DebugWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		5D9F28E4A1BD3EE666AFDF4E /* TunnelProv.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DCA690102DAF660E007C91A8 /* TunnelProv.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DC139F6E2DE97EA400F63846 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC139F6D2DE97EA400F63846 /* WidgetKit.framework */; };
-		DC139F702DE97EA400F63846 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC139F6F2DE97EA400F63846 /* SwiftUI.framework */; };
-		DC139F812DE97EA600F63846 /* DebugWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DC139F6C2DE97EA400F63846 /* DebugWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		DCA690122DAF660E007C91A8 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA690112DAF660E007C91A8 /* NetworkExtension.framework */; };
 		DCA6901A2DAF660E007C91A8 /* TunnelProv.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = DCA690102DAF660E007C91A8 /* TunnelProv.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DC139F7F2DE97EA600F63846 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC139F6B2DE97EA400F63846;
-			remoteInfo = DebugWidgetExtension;
-		};
-		DC6F1D492D94EADF0071B2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC6F1D362D94EADD0071B2B6;
-			remoteInfo = StikJIT;
-		};
-		DC6F1D532D94EADF0071B2B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC6F1D362D94EADD0071B2B6;
-			remoteInfo = StikJIT;
-		};
-		DCA690182DAF660E007C91A8 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DCA6900F2DAF660E007C91A8;
-			remoteInfo = TunnelProv;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		B7EB91DC1EA781BE7A28356C /* Embed Foundation Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				21FABAD2BEF86D366C52E0DA /* DebugWidgetExtension.appex in Embed Foundation Extensions */,
-				5D9F28E4A1BD3EE666AFDF4E /* TunnelProv.appex in Embed Foundation Extensions */,
-			);
-			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DCA6901F2DAF660E007C91A8 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -72,22 +20,8 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXFileReference section */
-		D1A90F1A02BB0F2DB34D7363 /* StikVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StikVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC139F6C2DE97EA400F63846 /* DebugWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DebugWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC139F6D2DE97EA400F63846 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		DC139F6F2DE97EA400F63846 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		DC139F862DE97F2000F63846 /* DebugWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugWidgetExtension.entitlements; sourceTree = "<group>"; };
 		DC6F1D372D94EADD0071B2B6 /* StikDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StikDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F1D482D94EADF0071B2B6 /* StikDebugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikDebugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC6F1D522D94EADF0071B2B6 /* StikDebugUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikDebugUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA690102DAF660E007C91A8 /* TunnelProv.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TunnelProv.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		DCA690112DAF660E007C91A8 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-/* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		1775D3612D9644FD00DFA8E0 /* Exceptions for "StikJIT" folder in "StikDebug" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -96,43 +30,52 @@
 			);
 			target = DC6F1D362D94EADD0071B2B6 /* StikDebug */;
 		};
-		A3B558DC13A56A19394DEFF7 /* Exceptions for "StikJIT" folder in "StikVPN" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				idevice/libem_proxy.a,
-				Info.plist,
-			);
-			target = DFF04EDE6402F55F2E04050D /* StikVPN */;
-		};
 		DC139F852DE97EA600F63846 /* Exceptions for "DebugWidget" folder in "DebugWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = DC139F6B2DE97EA400F63846 /* DebugWidgetExtension */;
-		};
-		DCA6901E2DAF660E007C91A8 /* Exceptions for "TunnelProv" folder in "TunnelProv" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = DCA6900F2DAF660E007C91A8 /* TunnelProv */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		DC139F712DE97EA400F63846 /* DebugWidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				DC139F852DE97EA600F63846 /* Exceptions for "DebugWidget" folder in "DebugWidgetExtension" target */,
-			);
-			path = DebugWidget;
-			sourceTree = "<group>";
-		};
 		DC6F1D392D94EADD0071B2B6 /* StikJIT */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				1775D3612D9644FD00DFA8E0 /* Exceptions for "StikJIT" folder in "StikDebug" target */,
+			);
+			path = StikJIT;
+			sourceTree = "<group>";
+		};
+		DC6F1D4F2D94EADF0071B2B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCA6900D2DAF660E007C91A8 /* Frameworks */ = {
+			children = (
+				DC6F1D372D94EADD0071B2B6 /* StikDebug.app */,
+				DC6F1D482D94EADF0071B2B6 /* StikDebugTests.xctest */,
+		DC6F1D362D94EADD0071B2B6 /* StikDebug */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC6F1D5C2D94EADF0071B2B6 /* Build configuration list for PBXNativeTarget "StikDebug" */;
+			buildPhases = (
+				DC6F1D332D94EADD0071B2B6 /* Sources */,
+				DC6F1D342D94EADD0071B2B6 /* Frameworks */,
+				DC6F1D352D94EADD0071B2B6 /* Resources */,
+				DCA6901F2DAF660E007C91A8 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DCA690192DAF660E007C91A8 /* PBXTargetDependency */,
+				DC139F802DE97EA600F63846 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DC6F1D392D94EADD0071B2B6 /* StikJIT */,
+			);
+			name = StikDebug;
+			packageProductDependencies = (
+			);
+			productName = StikJIT;
+			productReference = DC6F1D372D94EADD0071B2B6 /* StikDebug.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DC6F1D472D94EADF0071B2B6 /* StikDebugTests */ = {
 				A3B558DC13A56A19394DEFF7 /* Exceptions for "StikJIT" folder in "StikVPN" target */,
 			);
 			path = StikJIT;
@@ -432,7 +375,6 @@
 			projectRoot = "";
 			targets = (
 				DC6F1D362D94EADD0071B2B6 /* StikDebug */,
-				DFF04EDE6402F55F2E04050D /* StikVPN */,
 				DC6F1D472D94EADF0071B2B6 /* StikDebugTests */,
 				DC6F1D512D94EADF0071B2B6 /* StikDebugUITests */,
 				DCA6900F2DAF660E007C91A8 /* TunnelProv */,
@@ -442,29 +384,15 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4009A47AB5E9EEF641E2B9C2 /* Resources */ = {
+		DCA6900E2DAF660E007C91A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DC139F6A2DE97EA400F63846 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DC6F1D352D94EADD0071B2B6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DC6F1D462D94EADF0071B2B6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+		DCA6900C2DAF660E007C91A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -971,80 +899,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-                               INFOPLIST_FILE = StikJIT/StikVPNInfo.plist;
-                               INFOPLIST_FILE = StikJIT/StikVPNInfo.plist;
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = SZ977XLF24;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/StikJIT/idevice",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sv;
-				PRODUCT_NAME = StikVPN;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
-			name = Debug;
-		};
-		DCCE43472DEFE1DD00D433ED /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SZ977XLF24;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/StikJIT/idevice",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sv;
-				PRODUCT_NAME = StikVPN;
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		D4AAA327FD7829CB8E395D8B /* Build configuration list for PBXNativeTarget "StikVPN" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DCCE43462DEFE1DD00D433ED /* Debug */,
-				DCCE43472DEFE1DD00D433ED /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DC139F842DE97EA600F63846 /* Build configuration list for PBXNativeTarget "DebugWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DC139F822DE97EA600F63846 /* Debug */,
-				DC139F832DE97EA600F63846 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DC6F1D322D94EADD0071B2B6 /* Build configuration list for PBXProject "StikDebug" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DC6F1D5A2D94EADF0071B2B6 /* Debug */,
-				DC6F1D5B2D94EADF0071B2B6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		DC6F1D5C2D94EADF0071B2B6 /* Build configuration list for PBXNativeTarget "StikDebug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1055,33 +910,3 @@
 			defaultConfigurationName = Release;
 		};
 		DC6F1D5F2D94EADF0071B2B6 /* Build configuration list for PBXNativeTarget "StikDebugTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DC6F1D602D94EADF0071B2B6 /* Debug */,
-				DC6F1D612D94EADF0071B2B6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DC6F1D622D94EADF0071B2B6 /* Build configuration list for PBXNativeTarget "StikDebugUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DC6F1D632D94EADF0071B2B6 /* Debug */,
-				DC6F1D642D94EADF0071B2B6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DCA6901B2DAF660E007C91A8 /* Build configuration list for PBXNativeTarget "TunnelProv" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DCA6901C2DAF660E007C91A8 /* Debug */,
-				DCA6901D2DAF660E007C91A8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
-}
