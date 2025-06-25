@@ -279,47 +279,6 @@ extension EnvironmentValues {
 
 let fileManager = FileManager.default
 
-func httpGet(_ urlString: String, result: @escaping (String?) -> Void) {
-    if let url = URL(string: urlString) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                result(nil)
-                return
-            }
-            
-            if let data = data, let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    print("Response: \(httpResponse.statusCode)")
-                    if let dataString = String(data: data, encoding: .utf8) {
-                        result(dataString)
-                    }
-                } else {
-                    print("Received non-200 status code: \(httpResponse.statusCode)")
-                }
-            }
-        }
-        task.resume()
-    }
-}
-
-func UpdateRetrieval() -> Bool {
-    var ver: String {
-        let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-        return marketingVersion
-    }
-    let urlString = "https://raw.githubusercontent.com/0-Blu/StikJIT/refs/heads/main/version.txt"
-    var res = false
-    httpGet(urlString) { result in
-        if let fc = result {
-            if ver != fc {
-                res = true
-            }
-        }
-    }
-    return res
-}
-
 // MARK: - DNS Checker
 
 class DNSChecker: ObservableObject {
@@ -463,7 +422,7 @@ struct HeartbeatApp: App {
     ]
     
     init() {
-        newVerCheck()
+        assertAppStoreInstallation()
         let fixMethod = class_getInstanceMethod(UIDocumentPickerViewController.self, #selector(UIDocumentPickerViewController.fix_init(forOpeningContentTypes:asCopy:)))!
         let origMethod = class_getInstanceMethod(UIDocumentPickerViewController.self, #selector(UIDocumentPickerViewController.init(forOpeningContentTypes:asCopy:)))!
         method_exchangeImplementations(origMethod, fixMethod)
@@ -481,23 +440,6 @@ struct HeartbeatApp: App {
         }
     }
     
-    func newVerCheck() {
-        let currentDate = Calendar.current.startOfDay(for: Date())
-        let VUA = UserDefaults.standard.object(forKey: "VersionUpdateAlert") as? Date ?? Date.distantPast
-        
-        if currentDate > Calendar.current.startOfDay(for: VUA) {
-            if UpdateRetrieval() {
-                alert_title = "Update Avaliable!"
-                let urlString = "https://raw.githubusercontent.com/0-Blu/StikJIT/refs/heads/main/version.txt"
-                httpGet(urlString) { result in
-                    if result == nil { return }
-                    alert_string = "Update to: version \(result!)!"
-                    show_alert = true
-                }
-            }
-            UserDefaults.standard.set(currentDate, forKey: "VersionUpdateAlert")
-        }
-    }
     
     private func applyTheme() {
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
