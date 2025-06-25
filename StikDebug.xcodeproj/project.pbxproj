@@ -27,14 +27,12 @@
 			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DC3287492DEFF3AB005B2F11;
-			remoteInfo = StikVPN;
 		};
 		DC3287642DEFF3AD005B2F11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DC6F1D2F2D94EADD0071B2B6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = DC3287492DEFF3AB005B2F11;
-			remoteInfo = StikVPN;
 		};
 		DC6F1D492D94EADF0071B2B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -79,9 +77,6 @@
 		DC139F6D2DE97EA400F63846 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		DC139F6F2DE97EA400F63846 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		DC139F862DE97F2000F63846 /* DebugWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugWidgetExtension.entitlements; sourceTree = "<group>"; };
-		DC32874A2DEFF3AB005B2F11 /* StikVPN.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StikVPN.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC3287592DEFF3AD005B2F11 /* StikVPNTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikVPNTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC3287632DEFF3AD005B2F11 /* StikVPNUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikVPNUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F1D372D94EADD0071B2B6 /* StikDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StikDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F1D482D94EADF0071B2B6 /* StikDebugTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikDebugTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F1D522D94EADF0071B2B6 /* StikDebugUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StikDebugUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,19 +118,13 @@
 			path = DebugWidget;
 			sourceTree = "<group>";
 		};
-		DC32874B2DEFF3AB005B2F11 /* StikVPN */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StikVPN;
 			sourceTree = "<group>";
 		};
-		DC32875C2DEFF3AD005B2F11 /* StikVPNTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StikVPNTests;
 			sourceTree = "<group>";
 		};
-		DC3287662DEFF3AD005B2F11 /* StikVPNUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = StikVPNUITests;
 			sourceTree = "<group>";
 		};
 		DC6F1D392D94EADD0071B2B6 /* StikJIT */ = {
@@ -238,9 +227,6 @@
 				DC6F1D552D94EADF0071B2B6 /* StikJITUITests */,
 				DCA690132DAF660E007C91A8 /* TunnelProv */,
 				DC139F712DE97EA400F63846 /* DebugWidget */,
-				DC32874B2DEFF3AB005B2F11 /* StikVPN */,
-				DC32875C2DEFF3AD005B2F11 /* StikVPNTests */,
-				DC3287662DEFF3AD005B2F11 /* StikVPNUITests */,
 				DC6F1D752D94EB620071B2B6 /* Frameworks */,
 				DC6F1D382D94EADD0071B2B6 /* Products */,
 			);
@@ -254,9 +240,6 @@
 				DC6F1D522D94EADF0071B2B6 /* StikDebugUITests.xctest */,
 				DCA690102DAF660E007C91A8 /* TunnelProv.appex */,
 				DC139F6C2DE97EA400F63846 /* DebugWidgetExtension.appex */,
-				DC32874A2DEFF3AB005B2F11 /* StikVPN.app */,
-				DC3287592DEFF3AD005B2F11 /* StikVPNTests.xctest */,
-				DC3287632DEFF3AD005B2F11 /* StikVPNUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -296,9 +279,7 @@
 			productReference = DC139F6C2DE97EA400F63846 /* DebugWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		DC3287492DEFF3AB005B2F11 /* StikVPN */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC3287712DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPN" */;
 			buildPhases = (
 				DC3287462DEFF3AB005B2F11 /* Sources */,
 				DC3287472DEFF3AB005B2F11 /* Frameworks */,
@@ -309,18 +290,12 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				DC32874B2DEFF3AB005B2F11 /* StikVPN */,
 			);
-			name = StikVPN;
 			packageProductDependencies = (
 			);
-			productName = StikVPN;
-			productReference = DC32874A2DEFF3AB005B2F11 /* StikVPN.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DC3287582DEFF3AD005B2F11 /* StikVPNTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC3287722DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPNTests" */;
 			buildPhases = (
 				DC3287552DEFF3AD005B2F11 /* Sources */,
 				DC3287562DEFF3AD005B2F11 /* Frameworks */,
@@ -332,18 +307,12 @@
 				DC32875B2DEFF3AD005B2F11 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				DC32875C2DEFF3AD005B2F11 /* StikVPNTests */,
 			);
-			name = StikVPNTests;
 			packageProductDependencies = (
 			);
-			productName = StikVPNTests;
-			productReference = DC3287592DEFF3AD005B2F11 /* StikVPNTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DC3287622DEFF3AD005B2F11 /* StikVPNUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC3287732DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPNUITests" */;
 			buildPhases = (
 				DC32875F2DEFF3AD005B2F11 /* Sources */,
 				DC3287602DEFF3AD005B2F11 /* Frameworks */,
@@ -355,13 +324,9 @@
 				DC3287652DEFF3AD005B2F11 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				DC3287662DEFF3AD005B2F11 /* StikVPNUITests */,
 			);
-			name = StikVPNUITests;
 			packageProductDependencies = (
 			);
-			productName = StikVPNUITests;
-			productReference = DC3287632DEFF3AD005B2F11 /* StikVPNUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		DC6F1D362D94EADD0071B2B6 /* StikDebug */ = {
@@ -517,9 +482,6 @@
 				DC6F1D512D94EADF0071B2B6 /* StikDebugUITests */,
 				DCA6900F2DAF660E007C91A8 /* TunnelProv */,
 				DC139F6B2DE97EA400F63846 /* DebugWidgetExtension */,
-				DC3287492DEFF3AB005B2F11 /* StikVPN */,
-				DC3287582DEFF3AD005B2F11 /* StikVPNTests */,
-				DC3287622DEFF3AD005B2F11 /* StikVPNUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -650,12 +612,10 @@
 		};
 		DC32875B2DEFF3AD005B2F11 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DC3287492DEFF3AB005B2F11 /* StikVPN */;
 			targetProxy = DC32875A2DEFF3AD005B2F11 /* PBXContainerItemProxy */;
 		};
 		DC3287652DEFF3AD005B2F11 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DC3287492DEFF3AB005B2F11 /* StikVPN */;
 			targetProxy = DC3287642DEFF3AD005B2F11 /* PBXContainerItemProxy */;
 		};
 		DC6F1D4A2D94EADF0071B2B6 /* PBXTargetDependency */ = {
@@ -744,7 +704,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"StikVPN/Preview Content\"";
 				DEVELOPMENT_TEAM = SZ977XLF24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -759,7 +718,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -775,7 +733,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"StikVPN/Preview Content\"";
 				DEVELOPMENT_TEAM = SZ977XLF24;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -790,7 +747,6 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -810,13 +766,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPNTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StikVPN.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StikVPN";
 			};
 			name = Debug;
 		};
@@ -830,13 +784,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPNTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StikVPN.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/StikVPN";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -850,13 +802,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPNUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = StikVPN;
 			};
 			name = Debug;
 		};
@@ -869,13 +819,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.stik.sj.StikVPNUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = StikVPN;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1250,7 +1198,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC3287712DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPN" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC32876B2DEFF3AD005B2F11 /* Debug */,
@@ -1259,7 +1206,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC3287722DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPNTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC32876D2DEFF3AD005B2F11 /* Debug */,
@@ -1268,7 +1214,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DC3287732DEFF3AD005B2F11 /* Build configuration list for PBXNativeTarget "StikVPNUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC32876F2DEFF3AD005B2F11 /* Debug */,

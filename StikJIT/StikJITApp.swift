@@ -68,6 +68,9 @@ struct WelcomeSheetView: View {
 
 class VPNLogger: ObservableObject {
     @Published var logs: [String] = []
+    /// Maximum number of log entries to keep in memory to avoid unbounded growth.
+    private let maxLogEntries = 100
+
     static var shared = VPNLogger()
     private init() {}
     
@@ -77,6 +80,9 @@ class VPNLogger: ObservableObject {
         print("[\(fileName):\(line)] \(function): \(message)")
         #endif
         logs.append("\(message)")
+        if logs.count > maxLogEntries {
+            logs.removeFirst(logs.count - maxLogEntries)
+        }
     }
 }
 
@@ -279,45 +285,28 @@ extension EnvironmentValues {
 
 let fileManager = FileManager.default
 
-func httpGet(_ urlString: String, result: @escaping (String?) -> Void) {
-    if let url = URL(string: urlString) {
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                result(nil)
-                return
-            }
-            
-            if let data = data, let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    print("Response: \(httpResponse.statusCode)")
-                    if let dataString = String(data: data, encoding: .utf8) {
-                        result(dataString)
-                    }
-                } else {
-                    print("Received non-200 status code: \(httpResponse.statusCode)")
-                }
-            }
+func httpGet(_ urlString: String) async -> String? {
+    guard let url = URL(string: urlString) else { return nil }
+    do {
+        let (data, response) = try await URLSession.shared.data(from: url)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print("Received non-200 status code: \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+            return nil
         }
-        task.resume()
+        return String(data: data, encoding: .utf8)
+    } catch {
+        print("Error: \(error.localizedDescription)")
+        return nil
     }
 }
 
-func UpdateRetrieval() -> Bool {
-    var ver: String {
-        let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
-        return marketingVersion
-    }
+func checkForUpdate() async -> Bool {
+    let marketingVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
     let urlString = "https://raw.githubusercontent.com/0-Blu/StikJIT/refs/heads/main/version.txt"
-    var res = false
-    httpGet(urlString) { result in
-        if let fc = result {
-            if ver != fc {
-                res = true
-            }
-        }
+    if let remoteVersion = await httpGet(urlString)?.trimmingCharacters(in: .whitespacesAndNewlines) {
+        return marketingVersion != remoteVersion
     }
-    return res
+    return false
 }
 
 // MARK: - DNS Checker
@@ -484,18 +473,19 @@ struct HeartbeatApp: App {
     func newVerCheck() {
         let currentDate = Calendar.current.startOfDay(for: Date())
         let VUA = UserDefaults.standard.object(forKey: "VersionUpdateAlert") as? Date ?? Date.distantPast
-        
+
         if currentDate > Calendar.current.startOfDay(for: VUA) {
-            if UpdateRetrieval() {
-                alert_title = "Update Avaliable!"
-                let urlString = "https://raw.githubusercontent.com/0-Blu/StikJIT/refs/heads/main/version.txt"
-                httpGet(urlString) { result in
-                    if result == nil { return }
-                    alert_string = "Update to: version \(result!)!"
-                    show_alert = true
+            Task {
+                if await checkForUpdate() {
+                    alert_title = "Update Avaliable!"
+                    let urlString = "https://raw.githubusercontent.com/0-Blu/StikJIT/refs/heads/main/version.txt"
+                    if let result = await httpGet(urlString)?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                        alert_string = "Update to: version \(result)!"
+                        show_alert = true
+                    }
                 }
+                UserDefaults.standard.set(currentDate, forKey: "VersionUpdateAlert")
             }
-            UserDefaults.standard.set(currentDate, forKey: "VersionUpdateAlert")
         }
     }
     
@@ -699,23 +689,7 @@ struct HeartbeatApp: App {
         }
     }
 }
-
 // MARK: - Additional Helpers
-
-actor FunctionGuard<T> {
-    private var runningTask: Task<T, Never>?
-    
-    func execute(_ work: @escaping @Sendable () -> T) async -> T {
-        if let task = runningTask {
-            return await task.value // Return existing task's result if running
-        }
-        let task = Task.detached { work() }
-        runningTask = task
-        let result = await task.value
-        runningTask = nil
-        return result
-    }
-}
 
 class MountingProgress: ObservableObject {
     static var shared = MountingProgress()
@@ -1000,21 +974,21 @@ func downloadFile(from urlString: String, to destinationURL: URL, completion: @e
         return
     }
     
-    let task = URLSession.shared.downloadTask(with: url) { (tempLocalUrl, response, error) in
+    URLSession.shared.downloadTask(with: url) { tempLocalUrl, response, error in
         guard let tempLocalUrl = tempLocalUrl, error == nil else {
             print("Error downloading file from \(urlString): \(String(describing: error))")
             completion("Are you connected to the internet? [Download Failed]")
             return
         }
-        
+
         do {
             try fileManager.createDirectory(at: destinationURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
             try fileManager.moveItem(at: tempLocalUrl, to: destinationURL)
             print("Downloaded \(urlString) to \(destinationURL.path)")
+            completion("")
         } catch {
             print("Error saving file: \(error)")
+            completion("Error saving file: \(error.localizedDescription)")
         }
-    }
-    task.resume()
-    completion("")
+    }.resume()
 }
