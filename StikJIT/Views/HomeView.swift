@@ -404,7 +404,7 @@ struct HomeView: View {
         DispatchQueue.global(qos: .background).async {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             let success: Bool
-            if os.majorVersion >= 26 {
+            if os.majorVersion >= 19 {
                 success = JITEnableContext.shared.startDebugSession(withBundleID: bundleID, logger: { message in
                     if let message = message {
                         LogManager.shared.addInfoLog(message)
@@ -422,7 +422,7 @@ struct HomeView: View {
                 LogManager.shared.addInfoLog("Debug process completed for \(bundleID)")
                 isProcessing = false
 
-                if os.majorVersion >= 26 {
+                if os.majorVersion >= 19 {
                     if success { isDebugging = true }
                 } else if success && doAutoQuitAfterEnablingJIT {
                     exit(0)
@@ -440,7 +440,7 @@ struct HomeView: View {
         DispatchQueue.global(qos: .background).async {
             let os = ProcessInfo.processInfo.operatingSystemVersion
             let success: Bool
-            if os.majorVersion >= 26 {
+            if os.majorVersion >= 19 {
                 success = JITEnableContext.shared.startDebugSession(withPID: Int32(pid), logger: { message in
                     if let message = message {
                         LogManager.shared.addInfoLog(message)
@@ -459,7 +459,7 @@ struct HomeView: View {
                 showAlert(title: "Success", message: "JIT has been enabled for pid \(pid).", showOk: true, messageType: .success, completion: { _ in })
                 isProcessing = false
 
-                if os.majorVersion >= 26 {
+                if os.majorVersion >= 19 {
                     if success { isDebugging = true }
                 } else if success && doAutoQuitAfterEnablingJIT {
                     exit(0)
