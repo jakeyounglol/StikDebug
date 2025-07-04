@@ -9,33 +9,51 @@ import SwiftUI
 
 struct ScriptEditorView: View {
     let scriptURL: URL
+
     @State private var scriptContent: String = ""
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage("customAccentColor") private var customAccentColorHex: String = ""
+
+    private var accentColor: Color {
+        if customAccentColorHex.isEmpty {
+            return .blue
+        } else {
+            return Color(hex: customAccentColorHex) ?? .blue
+        }
+    }
 
     var body: some View {
-        VStack {
-            TextEditor(text: $scriptContent)
-                .padding()
-                .border(Color.gray, width: 1)
-                .navigationTitle(scriptURL.lastPathComponent)
-                .navigationBarTitleDisplayMode(.inline)
-                .font(.system(.footnote, design: .monospaced))
+        ZStack {
+            Color(colorScheme == .dark ? .black : .white)
+                .ignoresSafeArea()
 
-            HStack {
+            TextEditor(text: $scriptContent)
+                .font(.system(.footnote, design: .monospaced))
+                .padding(12)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color(UIColor.secondarySystemBackground))
+                )
+                .padding()
+        }
+        .navigationTitle(scriptURL.lastPathComponent)
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
                 Button("Cancel") {
                     dismiss()
                 }
-                .buttonStyle(.bordered)
+                .foregroundColor(accentColor)
+            }
 
-                Spacer()
-
+            ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save") {
                     saveScript()
                     dismiss()
                 }
-                .buttonStyle(.borderedProminent)
+                .foregroundColor(accentColor)
             }
-            .padding()
         }
         .onAppear(perform: loadScript)
     }
