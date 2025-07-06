@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// Custom code editor with line numbers styled like Xcode.
+
 struct ScriptEditorView: View {
     let scriptURL: URL
     @State private var scriptContent: String = ""
@@ -14,9 +16,9 @@ struct ScriptEditorView: View {
 
     var body: some View {
         VStack {
-            TextEditor(text: $scriptContent)
-                .padding()
-                .border(Color.gray, width: 1)
+            CodeEditor(text: $scriptContent)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .overlay(RoundedRectangle(cornerRadius: 4).stroke(Color.gray))
                 .navigationTitle(scriptURL.lastPathComponent)
                 .navigationBarTitleDisplayMode(.inline)
                 .font(.system(.footnote, design: .monospaced))
