@@ -10,6 +10,17 @@ import Network
 import UniformTypeIdentifiers
 import NetworkExtension
 
+// Register default settings before the app starts
+private func registerAdvancedOptionsDefault() {
+    let os = ProcessInfo.processInfo.operatingSystemVersion
+    // Enable advanced options by default on iOS 19/26 and above
+    let enabled = os.majorVersion >= 19 || os.majorVersion >= 26
+    UserDefaults.standard.register(defaults: ["enableAdvancedOptions": enabled])
+}
+
+// Ensure defaults are registered on launch
+registerAdvancedOptionsDefault()
+
 // MARK: - Welcome Sheet
 
 struct WelcomeSheetView: View {
